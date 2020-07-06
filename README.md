@@ -29,11 +29,11 @@ What is a hash function?
 
 The numbers that we have generated could get fairly large and we need a way to turn them in to an index of a list / array.
 
-Think of ways to do this geven a finite size of a list to turn the number in to one clamped to a range
+Think of ways to do this geven a finite size of a list to turn the number in to one clamped to a range (using the modulus %)
 
 
 ## Summary
-Hash Table has mthods / functions to put data in to it and to get data out of it
+Hash Table has methods / functions to put data in to it and to get data out of it
 
 To Put:
 1. Run the key string through a hashing function to get a hash value
