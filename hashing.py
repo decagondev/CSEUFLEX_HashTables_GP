@@ -22,13 +22,121 @@ def my_hash(s):
     for b in sb:
         # print byte
         total += b
+
+        total &= 0xffffffff # constrain our number to a size of 32bits / 4 bytes
     
     return total
 
 
-print(my_hash(my_string))  # => 133
-print(my_hash(my_string))  # => 133
-print(my_hash(my_string))  # => 133
-print(my_hash(my_string2))  # => 211
-print(my_hash(my_string2))  # => 211
 
+# print(my_hash(my_string))  # => 133
+# print(my_hash(my_string))  # => 133
+# print(my_hash(my_string))  # => 133
+# print(my_hash(my_string2))  # => 211
+# print(my_hash(my_string2))  # => 211
+
+hash_table = [None] * 8 # 0, 1, 2, 3, 4, 5, 6, 7
+
+# put
+"""
+1: put the key string through a hashing function to get a hash value -> h
+2: Mod the hash value with the data structure size (arr) to get the index -> i
+3: Store the value at the index
+"""
+
+def put(ht, key, val):
+    h = my_hash(key)
+
+    i = h % len(ht)
+    ht[i] = val
+
+put(hash_table, "DA", "DA Value")
+
+# h = my_hash("DA")
+
+# i = h % len(hash_table)
+# print(i)
+
+# hash_table[i] = "DA Value"
+
+
+# h = my_hash("BOB")
+
+# i = h % len(hash_table)
+
+# hash_table[i] = "BOB Value"
+put(hash_table, "BOB", "BOB Value")
+
+
+
+print(hash_table)
+
+# h = my_hash("BOB")
+
+# i = h % len(hash_table)
+
+# hash_table[i] = "BOB Value 2"
+put(hash_table, "BOB", "BOB Value 2")
+
+
+print(hash_table)
+
+# get
+"""
+1: put the key string through a hashing function to get a hash value -> h
+2: Mod the hash value with the data structure size (arr) to get the index -> i
+3: Return the value at the index
+"""
+def get(ht, key):
+    h = my_hash(key)
+
+    i = h % len(hash_table)
+
+    return hash_table[i]
+
+
+# get the valuye at the bob key -> Bob Value 2
+# h = my_hash("BOB")
+
+# i = h % len(hash_table)
+
+# v = hash_table[i]
+
+v = get(hash_table, "BOB")
+
+print(v)
+
+# hash_table = [None] * 8 # 0, 1, 2, 3, 4, 5, 6, 7
+
+# h = my_hash("DA")
+
+# i = h % len(hash_table)
+# print(i)
+
+# if hash_table[i] == None:
+#     hash_table[i] = "DA Value"
+# else:
+#     print("Collision!!!!!")
+
+# h = my_hash("BOB")
+
+# i = h % len(hash_table)
+
+# if hash_table[i] == None:
+#     hash_table[i] = "BOB Value"
+# else:
+#     print("Collision!!!!!")
+
+
+# print(hash_table)
+
+# h = my_hash("BOB")
+
+# i = h % len(hash_table)
+
+# if hash_table[i] == None:
+#     hash_table[i] = "BOB Value 2"
+# else:
+#     print("Collision!!!!!")
+
+# print(hash_table)
