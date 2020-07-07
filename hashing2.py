@@ -1,3 +1,18 @@
+# hashtableentry class 
+# key, value
+# repr
+# str
+
+class HashTableEntry:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+
+    def repr(self):
+        return f"HashTableEntry({self.key}, {self.value})"
+
+
+
 hash_table = [None] * 8   # 8 slots, all initiailized to None
 
 def my_hash(s):
@@ -17,11 +32,18 @@ def hash_index(key):
 
 def put(key, val):
     i = hash_index(key)
-    hash_table[i] = val
+    if hash_table[i] != None:
+        print(f"Collision! Overwriting {repr(hash_table[i])}")
+    hash_table[i] = HashTableEntry(key, val)
     
 def get(key):
     i = hash_index(key)
-    return hash_table[i]
+    entry = hash_table[i]
+
+    if entry == None:
+        return None
+
+    return entry.value
 
 def delete(key):
     i = hash_index(key)
