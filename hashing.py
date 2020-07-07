@@ -59,7 +59,7 @@ def my_hash(s):
         # print byte
         total += b
 
-        total &= 0xffffffff # constrain our number to a size of 32bits / 4 bytes
+        total &= 0xffffffff  # constrain our number to a size of 32bits / 4 bytes
     
     return total
 
@@ -126,14 +126,18 @@ print(hash_table)
 def get(ht, key):
     h = my_hash(key)
 
-    i = h % len(hash_table)
+    i = h % len(ht)
 
-    return hash_table[i]
+    return ht[i]
 
 
 # Delete
 def delete(ht, key):
-    pass
+    h = my_hash(key)
+
+    i = h % len(ht)
+
+    ht[i] = None
 
 # get the valuye at the bob key -> Bob Value 2
 # h = my_hash("BOB")
@@ -180,3 +184,4 @@ print(v)
 #     print("Collision!!!!!")
 
 # print(hash_table)
+

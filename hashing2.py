@@ -24,7 +24,9 @@ def get(key):
     return hash_table[i]
 
 def delete(key):
-    pass
+    i = hash_index(key)
+    hash_table[i] = None
+
     
 put("Hello", "Hello Value")
 put("World", "World Value")
