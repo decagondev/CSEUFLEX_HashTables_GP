@@ -11,7 +11,7 @@
 - Summary Get, Put, Time Complexity
 - Wrap up
 
-# Day 2
+## Day 2
 - Minor Recap of Get, Put etc
 - Collisions Intro
 - 5 min break
