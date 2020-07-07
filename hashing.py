@@ -131,6 +131,10 @@ def get(ht, key):
     return hash_table[i]
 
 
+# Delete
+def delete(ht, key):
+    pass
+
 # get the valuye at the bob key -> Bob Value 2
 # h = my_hash("BOB")
 

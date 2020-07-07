@@ -10,3 +10,14 @@
 - 5 min break
 - Summary Get, Put, Time Complexity
 - Wrap up
+
+# Day 2
+- Minor Recap of Get, Put etc
+- Collisions Intro
+- 5 min break
+- Open Addressing & Linear Probing Talk
+- build on hashtable code (Hash Table Entry class)
+- 5 min break
+- Collision Resolution by Chaining Talk
+- Linked List Refresher
+- Wrap Up

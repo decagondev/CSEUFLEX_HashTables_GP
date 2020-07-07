@@ -44,3 +44,149 @@ To Get:
 1. Run the key string through a hashing function to get a hash value
 2. Mod the hash value with the table size to get the index
 3. Return the value at this index
+
+
+## LLC
+
+```
+Slot
+Index    Chain (LL)
+-----    -------------------------------------------
+0        -> ({ key: "qux", val: 10 })
+1        -> ({ key: "foo", val: 12 }) -> ({ key: "plugh", val: 20 })
+2        -> ({ key: "bar", val: 30 }) -> ({ key: "baz", val: 999 }) -> ({ key: "xyzzy", val: 50 })
+3        -> None
+```
+
+```python
+
+# Put
+put("foo", 12) # hash to 1
+put("bar", 30) # hash to 2
+put("baz", 999) # hashes to 2 (collision!)
+put("qux", 10) # hash to 0
+put("plugh", 20) # hash to 1 (Collision!)
+put("xyzzy", 50) # hash to 2 (Collision!)
+
+# Get
+get("foo") # 1 => 12
+get("bar") # 2 => 30
+get("baz") # 2 C -> move to heads next => 999
+```
+
+## Load Factor & Resizing
+
+### The problem with overloaded Hash Tables
+
+Let's go over load factor
+
+- Perfectly Loaded Hash Table
+    - Absolutely `O(1)` lookups
+
+```
+0 |-> D
+1 |-> H
+2 |-> A
+3 |-> C
+4 |-> G
+5 |-> B
+6 |-> E
+7 |-> F
+```
+
+- Heavily Loaded Hash Table
+    - Getting Worse...
+
+```
+0 |-> D -> M
+1 |-> H
+2 |-> A -> I
+3 |-> C -> J -> L -> N
+4 |-> G
+5 |-> B -> O
+6 |-> E -> K -> P
+7 |-> F
+```
+
+- Degenerately Loaded Hash Table
+
+```
+0 |-> D -> M -> Q
+1 |-> H -> R -> X -> Y
+2 |-> A -> I -> 0
+3 |-> C -> J -> L -> N -> Z
+4 |-> G -> S -> U
+5 |-> B -> O -> 1 -> 2
+6 |-> E -> K -> P -> W
+7 |-> F -> T -> V
+```
+
+### Todays Assignment
+
+- Today you'll be implementing automatic hash table resizing.
+
+- We will not be going over the code in class.
+
+- We're just going to describe the algorithm.
+
+*TODO:* ...
+
+### What is Hash Table Load Factor?
+
+`Number of Elements / Number of Slots (buckets)`
+
+- if Load Factor > 0.7 (70%) then Grow
+- if Load Factor < 0.2 (20%) then Shrink
+
+*Example*
+```Python
+# if we have 32 slots and 23 elements then the algorithm applied will tell us that we have a load factor of 0.72
+e = 9
+s = 8
+lf = e / s
+print(lf)
+```
+
+### Computing the Hash Table
+- run through the whole table counting elements
+    - takes too long
+- keep terack of total items in the table. as we put or delete them
+    - remember that put might not increase the in the case of overwriting a value
+        - in that case the total will remain the same
+
+    - with the maitained value we can compute load factor at any time
+        - you always know how many slots you have
+
+
+### Growing the hash table based on load
+- each time we put, we should check the load factor to see if it should expand / grow
+    - if the load factor is over the max (0.7) it is time to rehash (or resize)
+
+- Process:
+    1. make a new hash table area, *double* the size of the previous
+        - Why Double?
+            - it is a costly operation to do
+            - make it infrequent
+            - in absence of any other good reason, it kepps the time complexity easy to compute
+                - could be any factor
+                - doubling is extremely common
+    
+    2. Go through the old hash table removing elements, and putting the removed elements in to the new hash table
+        - How do you iterate through all items in the old hash table?
+            - go through each linked list item in each hashtable bucket
+                - insert them into the new hash table area
+        
+        - what is the time complexity?
+            - `O(m)` `m` being thwe number of items in the hash table
+
+    3. Forget about the old hash table let the garbage collector clean it up
+
+    ### Shrinking the hash table based on load
+    - Each time you delete, you will check the load to see if it should contract (shrink)
+        - if the load is under the min (0.2) it is time to *rehash* / resize
+
+    - the same thing as expanding, except we want the new table to have half the capacity of the old
+
+    - for the assignment, we will say that `8` is the minimum size.
+        - don't want to kepp dividing the table down to zero
+
