@@ -1,5 +1,5 @@
 d = {
-    "foo": 12,
+    "foo": 120,
     "bar": 17,
     "qux": 2
 }
@@ -16,17 +16,18 @@ d = {
 
 items = list(d.items())
 
+print(f"unsorted: {items}")
 # Sort ascending by key
 
 items.sort()
 
-print(items)
+print(f"Sort ascending by key: {items}")
 
 # Sort descending by key
 
 items.sort(reverse=True)
 
-print(items)
+print(f"Sort descending by key: {items}")
 
 # Sort ascending by value
 
@@ -38,10 +39,10 @@ print(items)
 
 items.sort(key=lambda e: e[1])
 
-print(items)
+print(f"Sort ascending by value: {items}")
 
 # Sort descending by value
 
 items.sort(key=lambda e: e[1], reverse=True)
 
-print(items)
+print(f"Sort descending by value: {items}")
