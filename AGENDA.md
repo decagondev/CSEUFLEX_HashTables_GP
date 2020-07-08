@@ -21,3 +21,12 @@
 - Collision Resolution by Chaining Talk
 - Linked List Refresher
 - Wrap Up
+
+## Day 3
+- hash tables use cases (general)
+- 5 min break
+- lets build a lookup table
+- review how to sort
+- 5 min break
+- indexing a list
+- wrap up
