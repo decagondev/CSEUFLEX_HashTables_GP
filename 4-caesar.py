@@ -28,16 +28,71 @@ encode_table = {
     'W': 'B',
     'X': 'Q',
     'Y': 'V',
-    'Z': 'S'
+    'Z': 'S',
+    'a': 'h',
+    'b': 'z',
+    'c': 'y',
+    'd': 'w',
+    'e': 'o',
+    'f': 'r',
+    'g': 'j',
+    'h': 'd',
+    'i': 'p',
+    'j': 't',
+    'k': 'i',
+    'l': 'g',
+    'm': 'l',
+    'n': 'c',
+    'o': 'e',
+    'p': 'x',
+    'q': 'k',
+    'r': 'u',
+    's': 'n',
+    't': 'f',
+    'u': 'a',
+    'v': 'm',
+    'w': 'b',
+    'x': 'q',
+    'y': 'v',
+    'z': 's',
+    ' ': ' '
 }
 
 # now lets plan what we need next
 
+decode_table = {}
 
+# iterate over the encode table reversing the key and value
+for k, v in encode_table.items():
+    decode_table[v] = k
+
+# O(1) + O(m)
+
+def encode(s):
+    ret_val = ""
+
+    for c in s:
+        # if c.isspace():
+        #     continue  
+        # c = c.upper()
+        ret_val += encode_table[c]
+    
+    return ret_val
+
+def decode(s):
+    ret_val = ""
+
+    for c in s:
+        ret_val += decode_table[c]
+    
+    return ret_val
+
+# DOGGEBEUGW
+# HELLOWORLD
 
 # Tests
 if __name__ == "__main__":
-    plaintext = "HELLOWORLD"
+    plaintext = "This is a better charset for the cipher"
 
     ciphertext = encode(plaintext)
 
@@ -45,4 +100,4 @@ if __name__ == "__main__":
 
     plaintext2 = decode(ciphertext)
 
-    print(f"Plaintext:  {plaintext}")
+    print(f"Plaintext:  {plaintext2}")
