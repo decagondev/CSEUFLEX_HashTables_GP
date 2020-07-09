@@ -30,3 +30,12 @@
 - 5 min break
 - indexing a list
 - wrap up
+
+## Day 4
+- Talk about more use cases for Hash Tables
+- Transposition Tables
+- 5 min break
+- Let's plan a Web Cache
+- 5 min break
+- Let's write a Web Cache
+- wrap up
